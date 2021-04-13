@@ -71,5 +71,8 @@ novato <- function(nro) {
 novato(1)
 
     
+# Funções vetorizadas
 
+
+sapply(perfil_alunos[ ,2], mean)
 
