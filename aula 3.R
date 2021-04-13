@@ -52,4 +52,11 @@ hist(dnormal_central)
 dnormal[35]
 dnormal[dnormal > 2 & dnormal < 3]
 
+# Controle e repetição
+
+perfil_alunos$codificacao <- ifelse(perfil_alunos$instituicao == "UFPE", 0, 1)
+head(perfil_alunos)
+
+
+
 
