@@ -39,12 +39,17 @@ bootstrappingnormal100 <- replicate(100, sample(dnormal, 10, replace = TRUE))
 bootstrappingnormal100
 
 
-# Calclando com o R
+# Calculando com o R
 
 hist(dnormal)
 
 dnormal_central <- dnormal - mean(dnormal)
 hist(dnormal_central)
 
+
+# Indexação
+
+dnormal[35]
+dnormal[dnormal > 2 & dnormal < 3]
 
 
