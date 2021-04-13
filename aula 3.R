@@ -41,11 +41,10 @@ bootstrappingnormal100
 
 # Calclando com o R
 
-poisson_original <- rpois(200, 2)
-hist(poisson_original)
+hist(dnormal)
 
-poisson_cental <- poisson_original - mean(poisson_original)
-hist(poisson_cental)
+dnormal_central <- dnormal - mean(dnormal)
+hist(dnormal_central)
 
 
 
