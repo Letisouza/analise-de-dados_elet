@@ -39,4 +39,13 @@ bootstrappingnormal100 <- replicate(100, sample(dnormal, 10, replace = TRUE))
 bootstrappingnormal100
 
 
+# Calclando com o R
+
+poisson_original <- rpois(200, 2)
+hist(poisson_original)
+
+poisson_cental <- poisson_original - mean(poisson_original)
+hist(poisson_cental)
+
+
 
