@@ -58,5 +58,18 @@ perfil_alunos$codificacao <- ifelse(perfil_alunos$instituicao == "UFPE", 0, 1)
 head(perfil_alunos)
 
 
+# Criando funções
+
+    # função para saudar quem entrou na UFPE recentemente
+
+novato <- function(nro) {
+  if (nro == 1) {
+    cat("Bem-Vinda(o)\n")
+  }
+}
+
+novato(1)
+
+    
 
 
