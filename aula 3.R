@@ -26,3 +26,17 @@ dbinomial
 
 index <- seq(1, length(dbinomial))
 index
+
+# Amostragem e Bootstrapping
+
+bootstrappingnormal50 <- replicate(50, sample(dnormal, 10, replace = TRUE))
+bootstrappingnormal50
+
+bootstrappingnormal75 <- replicate(75, sample(dnormal, 10, replace = TRUE))
+bootstrappingnormal75
+
+bootstrappingnormal100 <- replicate(100, sample(dnormal, 10, replace = TRUE))
+bootstrappingnormal100
+
+
+
