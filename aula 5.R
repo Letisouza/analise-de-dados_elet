@@ -63,16 +63,44 @@ sinistrosRecifeRaw$natureza_acidente <- as.factor(sinistrosRecifeRaw$natureza_ac
 
 sinistrosRecifeRaw$tipo <- as.factor(sinistrosRecifeRaw$tipo)
 
+str(sinistrosRecifeRaw)
+
+# Questão 3
+
 # cria funçaõ para substituir not available (na) por 0
 naZero <- function(x) {
   x <- ifelse(is.na(x), 0, x)
 }
 
 # aplica a função naZero a todas as colunas de contagem
+
 sinistrosRecifeRaw[, 15:25] <- sapply(sinistrosRecifeRaw[, 15:25], naZero)
+
+# listando objetos de staging area no R
+
+ls() 
+
+# contando ocupação por objeto na staging area.
+
+for (item in ls()) { 
+  print(formatC(c(item, object.size(get(item))), 
+                format="d", 
+                width=30), 
+        quote=F)
+}
+
+# contando o lixo e tirando objetos desnecessários
+
+gc()
+
+rm(list = c("sinistrosRecife2019Raw", "sinistrosRecife2020Raw", "sinistrosRecife2021Raw"))
+
 
 # exporta em formato nativo do R
 saveRDS(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.rds")
 
 # exporta em formato tabular (.csv) - padrão para interoperabilidade
 write.csv2(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.csv")
+
+
+
