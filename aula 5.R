@@ -95,12 +95,25 @@ gc()
 
 rm(list = c("sinistrosRecife2019Raw", "sinistrosRecife2020Raw", "sinistrosRecife2021Raw"))
 
+# microbanchmarking para formato de exportação: salvamento e leitura
+
+library(microbenchmark)
+
+microbenchmark(a <- saveRDS(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.rds"), b <- write.csv2(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.csv"), write.table(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.txt"), times = 10L)
+
+microbenchmark(a <- readRDS('bases_tratadas/sinistrosRecife.rds'), b <- read.csv2('bases_tratadas/sinistrosRecife.csv', sep = ';'), write.table(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.txt"), times = 10L)
+
+
+#######
 
 # exporta em formato nativo do R
 saveRDS(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.rds")
 
 # exporta em formato tabular (.csv) - padrão para interoperabilidade
 write.csv2(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.csv")
+
+# exporta em formato de texto (.txt)
+write.table(sinistrosRecifeRaw, "bases_tratadas/sinistrosRecife.txt")
 
 
 
