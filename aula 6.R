@@ -67,4 +67,11 @@ tabelas <- html_nodes(arquivo, "table")
 hp2 <- html_table(tabelas[5], fill = T)
 hp2 <- as.data.frame(hp2)
 
+# ou
+
+library(tidyverse)
+
+url <- "https://pt.wikipedia.org/wiki/Harry_Potter_(s%C3%A9rie_de_filmes)"
+tabelas_2 <- url %>% read_html %>% html_nodes("table")
+elenco <- as.data.frame(html_table(tabelas_2[5]))
 
