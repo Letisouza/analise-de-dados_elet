@@ -34,6 +34,8 @@ sinistrosRecife2020Raw <- read.csv2('http://dados.recife.pe.gov.br/dataset/44087
 
 sinistrosRecife2021Raw <- read.csv2('http://dados.recife.pe.gov.br/dataset/44087d2d-73b5-4ab3-9bd8-78da7436eed1/resource/2caa8f41-ccd9-4ea5-906d-f66017d6e107/download/acidentes_2021-jan.csv', sep = ';', encoding = 'UTF-8')
  
+# selecionando variáveis para juntar bases 
+
 ####### adicionado em 03/05 #######
 
 sinistrosRecife2019Raw <- sinistrosRecife2019Raw[ ,-c(10:12)]
