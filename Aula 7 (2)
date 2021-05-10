@@ -1,0 +1,21 @@
+library(ff)
+
+system.time(base3 <- read.csv.ffdf(file=enderecobase))
+
+# operação matemática
+
+sum(base3[,5])
+
+base3[,2]/base3[,1]
+
+# operação estatística
+
+mean(base3[ ,1])
+
+median(base3[ ,1])
+
+# regressão linear
+
+base3amostra <- base3[sample(nrow(base3), 100000) , ]
+
+lm(c ~ ., base3amostra) 
