@@ -68,7 +68,21 @@ polity5 <- polity5 %>%
 
 world_polity2014 <- left_join(world_valid, polity5, by = c('country' = 'country'))
 
+status(world_polity2014)
+
+world_polity2014_valid <- drop_na(world_polity2014, polity, polity2)
+
 ###################################
 
+glimpse(world_polity2014_valid)
 
+# Validando a transformação dos dados
 
+library(validate)
+
+validacao <- validator(gini10 != is.na(gini10), polity != is.na(polity), polity2 != is.na(polity2))
+
+confronto <- confront(world_polity2014_valid, validacao)
+summary(confronto)
+
+plot(confronto)
