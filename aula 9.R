@@ -29,6 +29,17 @@ freq(ToothGrowth)
 plot_num(ToothGrowth)
 profiling_num(ToothGrowth)
 
-########
+###################################
+
+base_dentes <- ToothGrowth %>% pivot_wider(names_from = supp, values_from = dose)
+
+library(poliscidata)
+
+glimpse(world)
+
+world <- world %>% 
+  select(country, gini10, dem_level4)
+
+base_world <- world %>% pivot_wider(names_from = dem_level4, values_from = gini10)
 
 
