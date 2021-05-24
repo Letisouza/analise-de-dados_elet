@@ -86,3 +86,8 @@ confronto <- confront(world_polity2014_valid, validacao)
 summary(confronto)
 
 plot(confronto)
+
+
+ls()
+
+rm(list = c("polity5", "world_polity2014", "world_valid", "confronto", "validacao"))
