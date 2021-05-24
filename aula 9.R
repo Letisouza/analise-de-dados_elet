@@ -31,6 +31,8 @@ profiling_num(ToothGrowth)
 
 ###################################
 
+# Pivotando bases long para wide
+
 base_dentes <- ToothGrowth %>% pivot_wider(names_from = supp, values_from = dose)
 
 library(poliscidata)
@@ -41,5 +43,20 @@ world <- world %>%
   select(country, gini10, dem_level4)
 
 base_world <- world %>% pivot_wider(names_from = dem_level4, values_from = gini10)
+
+###################################
+
+glimpse(world)
+status(world)
+
+# Tirando os NA da variável
+world_valid <- drop_na(world, gini10)
+
+status(world_valid)
+
+###################################
+
+
+
 
 
