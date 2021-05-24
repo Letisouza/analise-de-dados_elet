@@ -56,7 +56,19 @@ status(world_valid)
 
 ###################################
 
+library(readxl)
 
+polity5 <- read_excel("bases_originais/p5v2018.xls")
+
+polity5 <- polity5 %>% 
+  filter(year == 2014) %>% 
+  select(country, polity, polity2)
+
+# Juntando bases de dados
+
+world_polity2014 <- left_join(world_valid, polity5, by = c('country' = 'country'))
+
+###################################
 
 
 
