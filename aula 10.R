@@ -49,4 +49,11 @@ worldselectDT[ ,lm(formula = hdi ~ dem_level4 + lifeex_f + gender_unequal + spen
 
 ######################################
 
+# Manipulação de dados: média de expectativa de vida de mulheres e homens por religião em países democráticos. 
+worldselect %>% 
+  filter(dem_level4 == "Full Democ") %>% 
+  rename(religion = religoin) %>% 
+  group_by(religion) %>% 
+  summarize(media_f = mean(lifeex_f), media_m = mean(lifeex_m))
+
 
