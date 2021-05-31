@@ -36,3 +36,17 @@ fct_count(worldfactor$religoin)
 fct_lump(worldfactor$religoin, n = 2)
 
 ######################################
+
+library(data.table)
+library(dplyr)
+
+# Tranformçao em data.table
+worldselectDT <- worldselect %>% 
+  setDT()
+
+# Reg linear
+worldselectDT[ ,lm(formula = hdi ~ dem_level4 + lifeex_f + gender_unequal + spendeduc + spendhealth)]
+
+######################################
+
+
