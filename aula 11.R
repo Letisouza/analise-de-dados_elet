@@ -80,3 +80,27 @@ covid19PERosner2 <- rosnerTest(covid19PEMun$casosLog, k = 10)
 covid19PERosner2
 
 ###############################
+
+# Imputação
+
+
+(ToothGrowthNASeed <- round(runif(10, 1, 50))) # criamos 10 valores aleatórios
+
+(ToothGrowth$len[ToothGrowthNASeed] <- NA) # imputamos NA nos valores aleatórios
+
+# Imputação numérica por tendência central
+
+library(Hmisc) # facilita imputação de tendência central
+
+# Média
+ToothGrowth$len <- impute(ToothGrowth$len, fun = mean)
+
+is.imputed(ToothGrowth$len) # teste se o valor foi imputado
+table(is.imputed(ToothGrowth$len)) # tabela de imputação por sim / não
+
+
+# imputação de valores semelhantes (hot deck) por instâncias
+ToothGrowth$len[ToothGrowthNASeed] <- NA # imputamos NA nos valores aleatórios
+
+library(VIM) # facilita imputação de valores semelhantes
+ToothGrowth2 <- kNN(ToothGrowth)
