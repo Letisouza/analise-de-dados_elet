@@ -1,0 +1,202 @@
+---
+title: "APRENDENDO A CRIAR UM PACOTE NO R DO ZERO, E EM PT-BR"
+author: "Leticia Souza, Danillo Rafael, Amanda Domingos e Marcus Torres"
+date: "30 de junho de 2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+A criação de um pacote depende de 5 passos básicos: **setup, inclusão de funções, documentação, instalação e distribuição.**
+Pacotes são importantes por armazenarem uma série de funções que são utilizadas com frequência por um indivíduo. Se você já precisou criar certas funções que aplica bastante em um banco de dados específico, objeto de trabalho ou estudo, por exemplo, criar um pacote com essas funções pode lhe ajudar a organizar seu código e não precisar copiar e colar em um novo script sempre que precisar delas .
+Para fazer todo o processo, tudo que você precisará é de 2 pacotes do R, _devtools_ e _roxygen2_, e uma conta no GitHub.
+Vamos aprender de um jeito bastante objetivo!
+
+## Setup do R
+
+A primeira coisa que você precisa fazer é criar uma pasta no seu computador. Essa pasta será o repositório _principal_ do seu processo de criação, e é assim que nos referiremos a ela daqui em diante.
+Depois, você deverá abrir um arquivo .R dentro da pasta principal. Nele, você fará o processo que criará todas as configurações do seu pacote. Indique primeiro a pasta principal como local para salvar as configurações, que é o objeto do código de criação do seu pacote, indicado pelo nome que deseja dar a ele entre aspas. Aqui, chamamos de “pacote"" para facilitar a compreensão.
+
+`setwd("principal")`
+
+`devtools::create("pacote")`
+
+No exemplo, um pacote chamado **pacote** é criado.
+Quando isso acontecer, você verá que na pasta principal aparecerá uma pasta chamada _pacote_. Basicamente, o comando gera uma pasta com o nome do seu pacote. 
+
+```{r echo=FALSE, message = F, warning = F}
+knitr::include_graphics("figura1.png")
+```
+
+Essa pasta contém um arquivo chamado _NAMESPACE_, um arquivo chamado _DESCRIPTION_, um projeto com o nome do pacote e uma _pasta chamada R_.
+
+```{r echo=FALSE, message = F, warning = F}
+knitr::include_graphics("figura3.png")
+```
+
+## Inclusão de funções 
+
+Depois que o seu pacote estiver configurado, o próximo passo é adicionar funções. Essa é a parte da criatividade.
+Dentro da pasta R, você criará arquivos .R que serão destinados a escrever suas funções. Você pode criar um arquivo desse tipo para cada função ou colocar todas as funções em um mesmo arquivo. Pouco importa.
+Aqui o processo é igual a qualquer outro script, você cria sua função da forma que desejar e salva o arquivo, nomeando-o como desejar. Caso você crie um arquivo .R para cada função, pode nomear os arquivos com o nome das funções, por exemplo.
+
+## Documentação
+
+Essa etapa é muito importante no processo de construção do seu pacote: documentar significa registrar e descrever o que cada código faz e em que deve ser usado. Basicamente, é o que aparece no _help_ quando utilizamos `?função`. 
+Depois de escrever o código das funções dentro da pasta R, a documentação deve ser feita no mesmo documento. Para a descrição do código, utilizamos #’ para comentar e detalhar o uso da função, e alguns argumentos: `@param` para indicar o argumento dentro da função; `@return` para indicar o que a função retorna; `@export` para indicar o código da função a ser exportado para uso.
+
+`#’ Objetivo da função`
+
+`#’`
+
+`#’ Descrição do que a função faz e do que é preciso.`
+
+`#’`
+
+`#’ @param argumento(s) Descrição do que for necessário como argumento(s) para a função.`
+
+`#’`
+
+`#’ @return descrição do que a função retorna como resultado.`
+
+`#’ @export` 
+
+`código da função`
+
+Feito isso na pasta _R_, volte para a pasta do seu pacote, a que contém a pasta _R_. Nela, você deverá criar um documento .R, que servirá para utilizarmos a função `document()`, do pacote _roxygen2_, para formatar a documentação como precisamos. O que a função faz é processar a documentação da função e criar uma pasta chamada _man_ na pasta do pacote, com um arquivo .Rd dentro dela para cada função criada e documentada.
+
+`setwd("./pacote")`
+
+`devtools::document()`
+
+Entre as aspas, indique o nome da pasta do pacote. Nesse exemplo, ela se chama **pacote**.
+
+```{r echo=FALSE, message = F, warning = F}
+knitr::include_graphics("figura2.png")
+```
+
+## Instalação
+
+Para instalar seu pacote, é muito fácil. Na sua pasta principal, onde o arquivo com o nome do seu pacote for criado(aquele com os arquivos _DESCRIPTION_ e as pastas _man_ e _R_), basta criar um arquivo .R com a função `install()`.
+
+`setwd("..")`
+
+`devtools::install(”nome do pacote”)`
+
+Depois disso, você pode utilizar a instalação normal com a função `install_packages()` e procurar pelas suas funções com `?função`.
+
+## Distribuição
+
+A forma mais comum de distribuição de pacotes é pelo GitHub. Assumimos que você já tem seu GitHub conectado ao seu computador. Se não tiver, veja aqui como fazer isso: [Beatriz Milz - RLadies](https://beatrizmilz.github.io/RLadies-Git-RStudio-2019/#1)
+Crie um repositório do seu GitHub para adicionar o seu pacote. Entre no projeto que se encontra na pasta com o nome do seu pacote. Em seu RStudio (e aqui vamos direcionar o processo aos usuários de RStudio, perdão :/ ), quando você abrir o projeto, clique em _tools_ -> _version control_ -> _project setup_.
+Aparecerá uma caixa de seleção ao lado da frase _Version control system_. Mude de “none” para “Git” e siga os passos que o RStudio requisitar de atualização.
+O próximo passo é commitar todos os arquivos disponíveis do projeto. Assim que estiver tudo pronto, vá até o terminal e digite esse código abaixo. Ele fará a conexão do seu projeto com o repositório criado por você e fará o push dos arquivos commitados.
+
+`git remote add origin https://github.com/UserDoSeuGitHub/NomeDoSeuRepostório.git`
+
+`git branch -M main`
+
+`git push -u origin main`
+
+O link do seu repositório estará disponível no GitHub.
+Depois de commitar e fazer o push de todos os arquivos do diretório, qualquer pessoa pode utilizar a função `install_gitbub(“username do seu GitHub/nome do repositório”)` para instalar seu pacote.
+
+`devtools::install_github(“username do github/nome do repositório”)`
+
+
+
+
+
+## **EXTRAS**
+
+## Dependências
+
+No R, ao utilizar outros pacotes, escrevemos a função `library()` para indicar o pacote e explorar suas funções. Na construção de um pacote, muitas vezes encontramos a necessidade de utilizar funções de pacotes que já existem. Como fazer a inclusão desses pacotes da maneira certa?
+
+Passos:
+
+1- O primeiro passo é entender que o pacote novo terá uma _dependência_ no pacote existente. 
+
+2- O segundo passo é editar o arquivo _DESCRIPTION_ com a informação do pacote desejado. Nesse caso, indicando a importação com o nome do pacote e a versão dele.
+
+`Imports:`
+
+    nome do pacote (>= número de versão)
+
+A parte da versão possui um componente lógico para indicar que são todas as versões maiores ou iguais à indicada, sem medo de atualizações possíveis da dependência. Também é possível não adicionar uma versão, de modo que o pacote utilizará alguma versão do pacote disponível, sem determinação.
+
+3- Em caso de adicionar novos pacotes como dependência, esse mesmo arquivo pode ser editado, adicionando os pacotes desejados com o mesmo padrão.
+
+`Imports:`
+
+    tidyverse (>= 1.3.1),
+    
+    ff (<= 4.0.4),
+    
+    readxl
+
+4- Para utilizar os pacotes no arquivo onde as funções são escritas, é necessário usar `::` para carregar as bibliotecas e especificar a função, em vez de utilizar `library()`.
+
+`tidyverse::summarise(mean())`
+
+
+## Uso de bases de dados externas
+
+Caso você queira utilizar uma base de dados externa para incrementar seu pacote, o primeiro passo é instalar (caso você ainda não tenha) e chamar o pacote data.table. Seguindo com o código, essa é a maneira recomendada para desenvolvimento do uso da base no pacote:
+
+`data.table::fread()`
+
+`pacote <- function(infile){`
+
+    in.dt <- fread(infile, header = TRUE
+    in.dt <- in.dt[!duplicated(in.dt[, 1]), ]
+    in.mat <- as.matrix(in.dt[, -1, with = FALSE])
+    rownames(in.mat) <- unlist(in.dt[, 1, with = FALSE])
+    in.mat
+  
+`}`
+
+Para utilizar variáveis de bases em pacotes externos, você vai precisar utilizar também a abordagem _double colon_, que permite acessar variáveis exportadas e incorporar em um namespace, que é utilizado da seguinte maneira:
+
+`pkg::name`
+
+`pkg:::name`
+
+argumentos:
+pkg = nome do pacote externo
+name = variável desejada do pacote externo
+
+O `pkg::name` retorna o valor da variável exportada no _NAMESPACE_, enquanto o `pkg:::name` retorna o valor da variável interna.
+
+Para prosseguir, é importante que você informe, no arquivo _DESCRIPTION_, na seção Imports, que seu pacote precisa de dependências externas. Então, será necessário usarmos o pacote data.table e adicionar o seguinte código:
+
+`Imports:`
+
+    data.table (>= 1.9.4)
+    
+A ideia é informar que o pacote que estamos construindo necessita do pacote data.table e, logo em seguida, a numeração especificando a versão do pacote externo.
+
+
+## Vignettes
+
+Vignettes são uma documentação maior e mais detalhada de pacotes. Para criar um, é necessário usar a função `use_vignette()` do pacote usethat. Isso criará um arquivo .Rmd, onde você preencherá com passos detalhados e exemplos para o uso do pacote.
+
+`usethat::use_vignette(“nome do pacote”)`
+
+
+## Referências
+
+[Writing an R package from scratch - Blog de Hilary Parker](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
+
+[Making Your First R Package - Blog de Fong Chun Chan](https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html)
+
+[R Packages - Hadley Wickham](https://r-pkgs.org/)
+
+
+
+
