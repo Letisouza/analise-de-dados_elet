@@ -190,7 +190,7 @@ summary {
 
 <h1 class="title toc-ignore">APRENDENDO A CRIAR UM PACOTE NO R DO ZERO, E EM PT-BR</h1>
 <h4 class="author">Leticia Souza, Danillo Rafael, Amanda Domingos e Marcus Torres</h4>
-<h4 class="date">30 de junho de 2021</h4>
+<h4 class="date">12 de julho de 2021</h4>
 
 </div>
 
@@ -252,7 +252,7 @@ summary {
 <p>No R, ao utilizar outros pacotes, escrevemos a função <code>library()</code> para indicar o pacote e explorar suas funções. Na construção de um pacote, muitas vezes encontramos a necessidade de utilizar funções de pacotes que já existem. Como fazer a inclusão desses pacotes da maneira certa?</p>
 <p>Passos:</p>
 <p>1- O primeiro passo é entender que o pacote novo terá uma <em>dependência</em> no pacote existente.</p>
-<p>2- O segundo passo é editar o arquivo <em>DESCRIPTION</em> com a informação do pacote desejado. Nesse caso, indicando a importação com o nome do pacote e a versão dele.</p>
+<p>2- O segundo passo é editar o arquivo <em>DESCRIPTION</em> com a informação do pacote desejado. Ele é pré-gerado pelo <code>roxygen2</code>. É nesse documento que você pode colocar informações como a importação com o nome do pacote, a versão dele, os autores (<code>[cre]</code> para criador, <code>[aut]</code> para autor,<code>[ctb]</code> para contribuinte e <code>[trl]</code> para tradutor) e a licença.</p>
 <p><code>Imports:</code></p>
 <pre><code>nome do pacote (&gt;= número de versão)</code></pre>
 <p>A parte da versão possui um componente lógico para indicar que são todas as versões maiores ou iguais à indicada, sem medo de atualizações possíveis da dependência. Também é possível não adicionar uma versão, de modo que o pacote utilizará alguma versão do pacote disponível, sem determinação.</p>
@@ -277,9 +277,8 @@ in.mat &lt;- as.matrix(in.dt[, -1, with = FALSE])
 rownames(in.mat) &lt;- unlist(in.dt[, 1, with = FALSE])
 in.mat</code></pre>
 <p><code>}</code></p>
-<p>Para utilizar variáveis de bases em pacotes externos, você vai precisar utilizar também a abordagem <em>double colon</em>, que permite acessar variáveis exportadas e incorporar em um namespace, que é utilizado da seguinte maneira:</p>
-<p><code>pkg::name</code></p>
-<p><code>pkg:::name</code></p>
+<p>Para utilizar variáveis de bases em pacotes externos, você vai precisar utilizar também a abordagem <code>::</code>, que permite acessar variáveis exportadas e incorporar em um namespace, que é utilizado da seguinte maneira:</p>
+<p><code>pkg::name</code> <code>pkg:::name</code></p>
 <p>argumentos: pkg = nome do pacote externo name = variável desejada do pacote externo</p>
 <p>O <code>pkg::name</code> retorna o valor da variável exportada no <em>NAMESPACE</em>, enquanto o <code>pkg:::name</code> retorna o valor da variável interna.</p>
 <p>Para prosseguir, é importante que você informe, no arquivo <em>DESCRIPTION</em>, na seção Imports, que seu pacote precisa de dependências externas. Então, será necessário usarmos o pacote data.table e adicionar o seguinte código:</p>
@@ -292,11 +291,20 @@ in.mat</code></pre>
 <p>Vignettes são uma documentação maior e mais detalhada de pacotes. Para criar um, é necessário usar a função <code>use_vignette()</code> do pacote usethat. Isso criará um arquivo .Rmd, onde você preencherá com passos detalhados e exemplos para o uso do pacote.</p>
 <p><code>usethat::use_vignette(“nome do pacote”)</code></p>
 </div>
+<div id="readme" class="section level2">
+<h2>README</h2>
+<p>Apesar de não ser uma peça obrigatória, o README é uma boa ferramenta para estimular que os usários usem o seu pacote e complementar a função dos <em>vignettes</em>. É nele que você pode introduzir o objetivo desse pacote, algumas funções e exemplos.</p>
+</div>
+<div id="novidades" class="section level2">
+<h2>Novidades</h2>
+<p>Para você mostrar atualizações ou correções de bugs, gerar um documento <code>NEWS.md</code> com <code>usethis::use_news_md</code> pode ser uma boa ideia.</p>
+</div>
 <div id="referências" class="section level2">
 <h2>Referências</h2>
 <p><a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/">Writing an R package from scratch - Blog de Hilary Parker</a></p>
 <p><a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html">Making Your First R Package - Blog de Fong Chun Chan</a></p>
 <p><a href="https://r-pkgs.org/">R Packages - Hadley Wickham</a></p>
+<p><a href="https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/#subsection4-3">How to write your own R package and publish it on CRAN</a></p>
 </div>
 
 

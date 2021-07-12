@@ -1,7 +1,7 @@
 ---
 title: "APRENDENDO A CRIAR UM PACOTE NO R DO ZERO, E EM PT-BR"
 author: "Leticia Souza, Danillo Rafael, Amanda Domingos e Marcus Torres"
-date: "30 de junho de 2021"
+date: "12 de julho de 2021"
 output:
   html_document: default
   pdf_document: default
@@ -122,7 +122,7 @@ Passos:
 
 1- O primeiro passo é entender que o pacote novo terá uma _dependência_ no pacote existente. 
 
-2- O segundo passo é editar o arquivo _DESCRIPTION_ com a informação do pacote desejado. Nesse caso, indicando a importação com o nome do pacote e a versão dele.
+2- O segundo passo é editar o arquivo _DESCRIPTION_ com a informação do pacote desejado. Ele é pré-gerado pelo `roxygen2`. É nesse documento que você pode colocar informações como a importação com o nome do pacote, a versão dele, os autores (`[cre]` para criador, `[aut]` para autor,`[ctb]` para contribuinte e `[trl]` para tradutor) e a licença.
 
 `Imports:`
 
@@ -161,10 +161,9 @@ Caso você queira utilizar uma base de dados externa para incrementar seu pacote
   
 `}`
 
-Para utilizar variáveis de bases em pacotes externos, você vai precisar utilizar também a abordagem _double colon_, que permite acessar variáveis exportadas e incorporar em um namespace, que é utilizado da seguinte maneira:
+Para utilizar variáveis de bases em pacotes externos, você vai precisar utilizar também a abordagem `::`, que permite acessar variáveis exportadas e incorporar em um namespace, que é utilizado da seguinte maneira:
 
 `pkg::name`
-
 `pkg:::name`
 
 argumentos:
@@ -189,6 +188,16 @@ Vignettes são uma documentação maior e mais detalhada de pacotes. Para criar 
 `usethat::use_vignette(“nome do pacote”)`
 
 
+## README
+
+Apesar de não ser uma peça obrigatória, o README é uma boa ferramenta para estimular que os usários usem o seu pacote e complementar a função dos _vignettes_. É nele que você pode introduzir o objetivo desse pacote, algumas funções e exemplos.
+
+
+## Novidades
+
+Para você mostrar atualizações ou correções de bugs, gerar um documento `NEWS.md` com ` usethis::use_news_md` pode ser uma boa ideia.
+
+
 ## Referências
 
 [Writing an R package from scratch - Blog de Hilary Parker](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
@@ -197,6 +206,4 @@ Vignettes são uma documentação maior e mais detalhada de pacotes. Para criar 
 
 [R Packages - Hadley Wickham](https://r-pkgs.org/)
 
-
-
-
+[How to write your own R package and publish it on CRAN](https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/#subsection4-3)
